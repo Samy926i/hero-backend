@@ -39,7 +39,7 @@ app.post('/generate-image', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        version: "ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
+        version: "382c03890d801cb8950e2223983ab2f05383800473c1765a9211af752206d2ae",
         input: { prompt }
       }),
     });
