@@ -39,12 +39,13 @@ app.post('/generate-image', async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        version: "db21e45a370d8eec847e7b7cfe9a1c492d5f3fdf1ebc3e36c4a6f64c54c08c15",
+        version: "b3d14e1cd1f9470bbb0bb68cac48e5f483e5be309551992cc33dc30654a82bb7",
         input: { prompt }
       }),
     });
 
     let prediction = await response.json();
+    console.log("🧾 Réponse Replicate :", prediction);
     console.log("📤 Requête envoyée à Replicate :", prompt);
     console.log("🕐 ID de prédiction :", prediction.id);
     
