@@ -45,14 +45,22 @@ app.post('/generate-image', async (req, res) => {
     });
 
     let prediction = await response.json();
-
+    console.log("📤 Requête envoyée à Replicate :", prompt);
+    console.log("🕐 ID de prédiction :", prediction.id);
+    
     while (prediction.status !== 'succeeded' && prediction.status !== 'failed') {
+      console.log("🔄 État actuel :", prediction.status);
       await new Promise(r => setTimeout(r, 1000));
       const poll = await fetch(`https://api.replicate.com/v1/predictions/${prediction.id}`, {
         headers: { 'Authorization': `Token ${REPLICATE_API_TOKEN}` },
       });
       prediction = await poll.json();
     }
+    
+    if (prediction.status === 'succeeded') {
+      console.log("✅ Image générée :", prediction.output[0]);
+    }
+    
 
     if (prediction.status === 'succeeded') {
       res.json({ imageUrl: prediction.output[0] });
